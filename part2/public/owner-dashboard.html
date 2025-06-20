@@ -95,8 +95,9 @@
            method: 'POST',
           credentials: 'include'
           });
-             window.location.href = '/';
-}
+          window.location.href = '/';
+        }
+        
         async function submitWalkRequest() {
           try {
             const res = await fetch('/api/walks', {
