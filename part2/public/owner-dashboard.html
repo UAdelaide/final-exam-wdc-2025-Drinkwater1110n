@@ -117,12 +117,12 @@
           }
         }
 
-        methods: {
+      methods: {
           async logout() {
-    await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
-    window.location.href = '/';
-  }
-}
+          await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
+          window.location.href = '/';
+          }
+        }
 
 
         onMounted(() => {
