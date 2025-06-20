@@ -97,7 +97,7 @@
           });
           window.location.href = '/';
         }
-        
+
         async function submitWalkRequest() {
           try {
             const res = await fetch('/api/walks', {
@@ -123,17 +123,7 @@
             message.value = '';
           }
         }
-
-
-
-      methods: {
-          async logout() {
-          await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
-          window.location.href = '/';
-          }
-        }
-
-
+        
         onMounted(() => {
           loadWalks();
         });
