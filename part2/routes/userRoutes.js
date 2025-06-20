@@ -35,7 +35,7 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// POST login 
+// POST login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -48,6 +48,14 @@ router.post('/login', async (req, res) => {
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+
+    router.post('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid'); // remove session cookie
+    res.json({ message: 'Logged out' });
+  });
+});
+
 
     // Store session
     req.session.user = {
