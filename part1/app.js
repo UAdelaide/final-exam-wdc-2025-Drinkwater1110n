@@ -101,21 +101,24 @@ app.get('/api/walkers/summary', async (req, res) => {
         u.username AS walker_username,
         COUNT(DISTINCT r.rating_id) AS total_ratings,
         ROUND(AVG(r.rating), 1) AS average_rating,
-        COUNT(DISTINCT wr.request_id) AS completed_walks
+        COUNT(DISTINCT wa.request_id) AS completed_walks
       FROM Users u
       LEFT JOIN WalkRatings r ON u.user_id = r.walker_id
-      LEFT JOIN WalkRequests wr ON u.user_id = wr.accepted_walker_id AND wr.status = 'completed'
+      LEFT JOIN WalkApplications wa
+        ON u.user_id = wa.walker_id
+        AND wa.status = 'accepted'
+        AND wa.request_id IN (
+          SELECT request_id FROM WalkRequests WHERE status = 'completed'
+        )
       WHERE u.role = 'walker'
       GROUP BY u.user_id
     `);
     res.json(rows);
   } catch (err) {
-    console.error('💥 SQL Error in /walkers/summary:', err);
+    console.error('💥 Error in /api/walkers/summary:', err.message);
     res.status(500).json({ error: 'Failed to fetch walker summary' });
   }
 });
-
-
 
 app.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
