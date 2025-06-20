@@ -117,7 +117,13 @@
           }
         }
 
-        
+        methods: {
+          async logout() {
+    await fetch('/api/users/logout', { method: 'POST', credentials: 'include' });
+    window.location.href = '/';
+  }
+}
+
 
         onMounted(() => {
           loadWalks();
