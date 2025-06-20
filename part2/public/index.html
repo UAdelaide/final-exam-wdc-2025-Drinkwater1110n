@@ -76,6 +76,23 @@ createApp({
       }
     }
   }
+
+  mounted() {
+  fetch('/api/dogs')
+    .then(res => res.json())
+    .then(async dogsData => {
+      const dogsWithImages = await Promise.all(
+        dogsData.map(async dog => {
+          const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+          const imgData = await imgRes.json();
+          return { ...dog, image: imgData.message };
+        })
+      );
+      this.dogs = dogsWithImages;
+    })
+    .catch(err => console.error('Error loading dogs:', err));
+}
+
 }).mount('#app');
 </script>
 
