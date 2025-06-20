@@ -90,7 +90,13 @@
             error.value = 'Failed to load walk requests';
           }
         }
-
+        async function logout() {
+           await fetch('/api/users/logout', {
+           method: 'POST',
+          credentials: 'include'
+          });
+             window.location.href = '/';
+}
         async function submitWalkRequest() {
           try {
             const res = await fetch('/api/walks', {
