@@ -90,8 +90,7 @@
               headers: { 'Content-Type': 'application/json' },
               const walkerId = await getCurrentUser();
               if (!walkerId) throw new Error('Could not determine walker ID');
-body: JSON.stringify({ walker_id: walkerId })
-
+              body: JSON.stringify({ walker_id: walkerId })
             });
             const result = await res.json();
 
