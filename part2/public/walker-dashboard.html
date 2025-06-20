@@ -47,7 +47,7 @@
         const error = ref('');
         const user = 3;
 
-        async function logout() {
+      async function logout() {
          try {
             await fetch('/api/users/logout', {
               method: 'POST',
