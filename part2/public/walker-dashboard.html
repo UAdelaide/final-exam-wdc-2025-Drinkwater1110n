@@ -75,6 +75,13 @@
             message.value = '';
           }
         }
+        async function logout() {
+            await fetch('/api/users/logout', {
+            method: 'POST',
+            credentials: 'include'
+          });
+        window.location.href = '/';
+        }
 
         methods: {
           async logout() {
