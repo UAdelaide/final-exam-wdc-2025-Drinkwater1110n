@@ -17,7 +17,7 @@ let db;
       database: 'DogWalkService'
     });
 
-    console.log('✅ Connected to DogWalkService');
+    console.log(' Connected to DogWalkService');
 
     // Clear existing data and insert test data
     await db.query('DELETE FROM WalkRatings');
@@ -59,7 +59,7 @@ let db;
       )
     `);
   } catch (err) {
-    console.error('❌ Startup error:', err.message);
+    console.error(' Startup error:', err.message);
   }
 })();
 
