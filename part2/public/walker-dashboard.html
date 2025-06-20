@@ -47,6 +47,19 @@
         const error = ref('');
         const user = 3;
 
+        async function logout() {
+         try {
+            await fetch('/api/users/logout', {
+              method: 'POST',
+             credentials: 'include'
+            });
+            window.location.href = '/';
+          } catch (err) {
+            console.error('Logout failed:', err);
+            error.value = 'Logout failed';
+         }
+        }
+
         async function loadWalkRequests() {
           try {
             const res = await fetch('/api/walks');
@@ -74,13 +87,6 @@
             error.value = err.message;
             message.value = '';
           }
-        }
-        async function logout() {
-            await fetch('/api/users/logout', {
-            method: 'POST',
-            credentials: 'include'
-          });
-        window.location.href = '/';
         }
 
         onMounted(() => {
