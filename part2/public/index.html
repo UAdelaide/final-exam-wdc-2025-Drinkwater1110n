@@ -31,6 +31,28 @@
     <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
   </div>
 
+  <!-- Dog Table -->
+    <h2 class="mt-5">Our Dogs</h2>
+    <table class="table table-bordered" v-if="dogs.length > 0">
+      <thead class="table-light">
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dog in dogs" :key="dog.dog_id">
+          <td><img :src="dog.image" alt="Dog Photo" width="100" /></td>
+          <td>{{ dog.dog_name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_username }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <script>
 const { createApp } = Vue;
 
@@ -40,7 +62,7 @@ createApp({
       message: 'Welcome to the Dog Walking Service!',
       username: '',
       password: '',
-      error: ''
+      error: '',
       dogs: []
     };
   },
