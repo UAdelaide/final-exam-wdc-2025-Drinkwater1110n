@@ -123,7 +123,7 @@
             message.value = '';
           }
         }
-        
+
         onMounted(() => {
           loadWalks();
         });
@@ -134,6 +134,7 @@
           message,
           error,
           submitWalkRequest
+          logout
         };
       }
     }).mount('#app');
