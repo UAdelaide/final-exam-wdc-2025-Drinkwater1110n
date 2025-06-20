@@ -82,6 +82,19 @@
         const message = ref('');
         const error = ref('');
 
+        async function logout() {
+      try {
+        await fetch('/api/users/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        window.location.href = '/';
+      } catch (err) {
+        console.error('Logout failed:', err);
+        error.value = 'Logout failed';
+      }
+    }
+
         async function loadWalks() {
           try {
             const res = await fetch('/api/walks');
@@ -89,13 +102,6 @@
           } catch (err) {
             error.value = 'Failed to load walk requests';
           }
-        }
-        async function logout() {
-          await fetch('/api/users/logout', {
-           method: 'POST',
-          credentials: 'include'
-          });
-          window.location.href = '/';
         }
 
         async function submitWalkRequest() {
