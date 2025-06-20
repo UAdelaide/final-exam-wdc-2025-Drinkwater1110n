@@ -115,11 +115,11 @@ app.get('/api/walkers/summary', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    console.error('💥 Error in /api/walkers/summary:', err.message);
+    console.error(' Error in /api/walkers/summary:', err.message);
     res.status(500).json({ error: 'Failed to fetch walker summary' });
   }
 });
 
 app.listen(port, () => {
-  console.log(`🚀 Server running at http://localhost:${port}`);
+  console.log(` Server running at http://localhost:${port}`);
 });
