@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOGGIES!!!!!!</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      background: linear-gradient(45deg, red, blue, yellow, green);
+      font-family: Comic Sans MS;
+      animation: blink 0.3s infinite alternate;
+    }
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.5; }
+    }
+    .big-button {
+      font-size: 24px;
+      padding: 30px;
+      margin: 50px;
+      cursor: pointer;
+    }
+    .dog-img {
+      max-width: 500px;
+      border: 10px dashed magenta;
+      box-shadow: 0 0 30px cyan;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>TODAY'S RANDOM DOG - click FAST!!!</h1>
+    <button class="big-button" @click="loadDog">FETCH DOG PLZ</button>
+    <p v-if="dogUrl"><img class="dog-img" :src="dogUrl" alt=""></p>
+    <p v-if="dogUrl">Breed: {{ breed }}</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          dogUrl: '',
+          breed: 'totally unknown'
+        };
+      },
+      methods: {
+        loadDog() {
+          fetch('https://dog.ceo/api/breeds/image/random')
+            .then(res => res.json())
+            .then(data => {
+              this.dogUrl = data.message;
+              const match = data.message.match(/breeds\/([^/]+)/);
+              this.breed = match ? match[1] : 'unknown';
+            });
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
