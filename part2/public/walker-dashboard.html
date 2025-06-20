@@ -54,10 +54,10 @@
             const user = await res.json();
             return user.user_id;
           } catch (err) {
-             error.value = 'Failed to retrieve current user.';
-             return null;
-  }
-}
+            error.value = 'Failed to retrieve current user.';
+             eturn null;
+         }
+        }
 
 
       async function logout() {
